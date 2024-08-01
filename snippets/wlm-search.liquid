@@ -1,0 +1,11 @@
+{%- assign w_continue = 'no' -%}
+{% assign wlmHideItem_Search = false %}{% assign wlmLockedTags191637 = false %}
+{% for tag in customer.tags %}
+{% if tag == 'Brian' %}{% assign wlmLockedTags191637 = true %}{% endif %}
+{% endfor %}
+
+
+
+{% if wlmHideItem_Search == true %}{% continue %}{% endif %}
+
+{%- if wlm_is_render == 'yes' -%}{{- w_continue -}}{%-endif-%}
