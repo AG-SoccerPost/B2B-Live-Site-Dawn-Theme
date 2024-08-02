@@ -3,41 +3,17 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
+{% assign discount_applied = false %}
+{% assign discount_value = 0 %}
+{% assign new_total_price = cart.total_price %}
 
-
-<div class="cart-summary">
-  <div>Subtotal: {{ cart.items_subtotal_price | money }}</div>
-
-  {% assign discount_applied = false %}
-  {% assign discount_value = 0 %}
-  {% assign new_total_price = cart.total_price %}
-
-  {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
-    {% assign discount_applied = true %}
-    {% assign discount_amount = 10 %}
-    {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
-    {% assign new_total_price = cart.total_price | minus: discount_value %}
-  {% endif %}
+{% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
+  {% assign discount_applied = true %}
+  {% assign discount_amount = 100 %}
+  {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
+  {% assign new_total_price = cart.total_price | minus: discount_value %}
+{% endif %}
   
-  {% if cart.cart_level_discount_applications.size > 0 or discount_applied %}
-    Discounts:
-    <ul>
-      {% for discount_application in cart.cart_level_discount_applications %}
-        <li>
-          {{ discount_application.title }} - {{ discount_application.total_allocated_amount | money }}
-        </li>
-      {% endfor %}
-      {% if discount_applied %}
-        <li>
-          10% discount applied! - {{ discount_value | money }}
-        </li>
-      {% endif %}
-    </ul>
-  {% endif %}
-
-  <div>Total: {{ new_total_price | money }}</div>
-</div>
-
 
 
 
@@ -65,6 +41,7 @@
                   <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
                   <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
                 </div>
+                
                 {% if cart.cart_level_discount_applications.size > 0 or discount_applied %}
                     Discounts:
                     <ul>
