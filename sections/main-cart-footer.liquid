@@ -7,12 +7,7 @@
 {% assign discount_value = 0 %}
 {% assign new_total_price = cart.total_price %}
 
-{% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
-  {% assign discount_applied = true %}
-  {% assign discount_amount = 100 %}
-  {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
-  {% assign new_total_price = cart.total_price | minus: discount_value %}
-{% endif %}
+
   
 
 
@@ -42,7 +37,15 @@
                   <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
                 </div>
                 
-                {% if cart.cart_level_discount_applications.size > 0 or discount_applied %}
+                
+                
+                {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
+                  {% assign discount_applied = true %}
+                  {% assign discount_amount = 100 %}
+                  {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
+                  {% assign new_total_price = cart.total_price | minus: discount_value %}
+
+                 {% if cart.cart_level_discount_applications.size > 0 or discount_applied %}
                     Discounts:
                     <ul>
                       {% for discount_application in cart.cart_level_discount_applications %}
@@ -63,6 +66,9 @@
                   {% else %}
                     <div>Total: {{ cart.total_price | money }}</div>
                   {% endif %}
+
+                  
+                {% endif %}
 
 
                 
