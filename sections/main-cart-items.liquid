@@ -19,7 +19,12 @@
   }
 {%- endstyle -%}
 
-
+{% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
+    <script>
+        try { fetch( '/discount/freeship1' ) }
+        catch(e) {}
+    </script>
+{% endif %}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
