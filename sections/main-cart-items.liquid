@@ -52,7 +52,7 @@
   <!-- Apply new line price and display discount message -->
   {%- assign subtotal = subtotal | plus: new_line_price -%}
   <script>
-    console.log({{ discount_message }})
+    console.log({{ discount_message | json }})
     console.log({{ item.line_price | money }})
     console.log({{ new_line_price | money }})
   </script>
