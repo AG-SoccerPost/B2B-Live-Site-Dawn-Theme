@@ -22,7 +22,7 @@
 {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
     <script>
         try { 
-          fetch( '/discount/freeship1' );
+          fetch( '/discount/freeship1&corp' );
         }
         catch(e) {}
     </script>
