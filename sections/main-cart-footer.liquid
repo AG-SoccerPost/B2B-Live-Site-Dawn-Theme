@@ -32,8 +32,11 @@
               {% render block %}
             {%- when 'subtotal' -%}
               <div class="js-contents" {{ block.shopify_attributes }}>
-                
-                {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
+                 <div class="totals">
+                    <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
+                    <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
+                  </div>
+                <!-- {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
                   {% assign discount_applied = true %}
                   {% assign discount_amount = 100 %}
                   {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
@@ -63,7 +66,7 @@
                     <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
                     <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
                   </div>
-                {% endif %}
+                {% endif %} -->
 
 
                 
