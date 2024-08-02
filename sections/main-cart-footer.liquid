@@ -55,11 +55,9 @@
                       </ul>
                   {% endif %}
                 
-                          <!-- {% if discount_applied %}
+                          {% if discount_applied %}
                             <div>Total: {{ new_total_price | money }}</div>
-                          {% else %}
-                            <div>Total: {{ cart.total_price | money }}</div>
-                          {% endif %} -->
+                          {% endif %}
                 {% else%}
                   <div class="totals">
                     <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
