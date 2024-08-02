@@ -28,29 +28,6 @@
     </script>
 {% endif %}
 
-{% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
-    <script>
-      {%- assign discount_amount = 100 -%} 
-      {%- assign discount_message = 'Discount applied!' -%}
-      
-      {%- for item in cart.items -%}
-        {%- assign discount_multiplier = discount_amount | divided_by: 100 -%}
-        {%- assign new_line_price = item.line_price | times: discount_multiplier -%}
-        {%- assign subtotal = item.line_price | minus: new_line_price -%}
-
-        console.log("{{ discount_message }}");
-        console.log("{{ item.line_price | money }}");
-        console.log("{{ new_line_price | money }}");
-        console.log("{{ subtotal | money }}");
-        console.log("{{ cart.total_price | money }}");
-      {%- endfor -%}
-    </script>
-{% endif %}
-
-
-
-
-
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
