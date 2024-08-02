@@ -34,7 +34,6 @@
 {%- assign discount_amount = 100 -%} <!-- Discount amount (e.g., 10% or $10) -->
 {%- assign discount_message = 'Discount applied!' -%}
 
-{%- assign subtotal = 0 -%}
 {%- for item in cart.items -%}
   {%- if discount_type == 'percent' -%}
     {%- assign discount_multiplier = discount_amount | divided_by: 100 -%}
@@ -42,7 +41,7 @@
   {%- endif -%}
 
   <!-- Apply new line price and display discount message -->
-  {%- assign subtotal = subtotal | minus: new_line_price -%}
+  {%- assign subtotal = item.line_price | minus: new_line_price -%}
   <script>
     console.log({{ discount_message | json }})
     console.log({{ item.line_price | money }})
