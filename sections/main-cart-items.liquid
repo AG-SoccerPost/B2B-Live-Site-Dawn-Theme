@@ -29,28 +29,27 @@
 {% endif %}
 
 
-
-{%- assign discount_type = 'percent' -%} <!-- or 'fixed' -->
+<script>
 {%- assign discount_amount = 100 -%} <!-- Discount amount (e.g., 10% or $10) -->
 {%- assign discount_message = 'Discount applied!' -%}
 
 {%- for item in cart.items -%}
-  {%- if discount_type == 'percent' -%}
+  
     {%- assign discount_multiplier = discount_amount | divided_by: 100 -%}
     {%- assign new_line_price = item.line_price | times: discount_multiplier -%}
-  {%- endif -%}
 
   <!-- Apply new line price and display discount message -->
   {%- assign subtotal = item.line_price | minus: new_line_price -%}
-  <script>
+  
     console.log({{ discount_message | json }})
     console.log({{ item.line_price | money }})
     console.log({{ new_line_price | money }})
     console.log({{ subtotal | money }})
-  </script>
+  
     
   
 {%- endfor -%}
+</script>
 
 
 
