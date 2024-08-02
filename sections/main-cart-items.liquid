@@ -37,31 +37,21 @@
 {%- assign subtotal = 0 -%}
 {%- for item in cart.items -%}
   {%- if discount_type == 'percent' -%}
-    {%- assign discount_multiplier = 1 | minus: discount_amount | times: 0.01 -%}
+    {%- assign discount_multiplier = discount_amount | divided_by: 100 -%}
     {%- assign new_line_price = item.line_price | times: discount_multiplier -%}
-  {%- else -%}
-    {%- assign discount_amount_in_cents = discount_amount | times: 100 -%}
-    {%- assign discount_value = discount_amount_in_cents | divided_by: 100 -%}
-    {%- assign total_discount = discount_value | times: item.quantity -%}
-    {%- assign new_line_price = item.line_price | minus: total_discount -%}
-    {%- if new_line_price < 0 -%}
-      {%- assign new_line_price = 0 -%}
-    {%- endif -%}
   {%- endif -%}
 
   <!-- Apply new line price and display discount message -->
-  {%- assign subtotal = subtotal | plus: new_line_price -%}
+  {%- assign subtotal = subtotal | minus: new_line_price -%}
   <script>
     console.log({{ discount_message | json }})
     console.log({{ item.line_price | money }})
     console.log({{ new_line_price | money }})
+    console.log({{ subtotal | money }})
   </script>
     
   
 {%- endfor -%}
-
-<!-- <p>Subtotal with Discounts: {{ subtotal | money }}</p> -->
-
 
 
 
