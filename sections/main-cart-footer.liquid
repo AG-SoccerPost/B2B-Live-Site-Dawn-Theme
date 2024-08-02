@@ -3,6 +3,49 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
+
+
+<div class="cart-summary">
+  <div>Subtotal: {{ cart.items_subtotal_price | money }}</div>
+
+  {% assign discount_applied = false %}
+  {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
+    {% assign discount_applied = true %}
+    {% assign discount_amount = 10 %}
+    {% assign discount_multiplier = 1 | minus: discount_amount | divided_by: 100 %}
+    {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
+    {% assign new_total_price = cart.total_price | times: discount_multiplier %}
+  {% endif %}
+
+  {% if cart.cart_level_discount_applications.size > 0 or discount_applied %}
+    Discounts:
+    <ul>
+      {% for discount_application in cart.cart_level_discount_applications %}
+        <li>
+          {{ discount_application.title }} - {{ discount_application.total_allocated_amount | money }}
+        </li>
+      {% endfor %}
+      {% if discount_applied %}
+        <li>
+          10% discount applied! - {{ discount_value | money }}
+        </li>
+      {% endif %}
+    </ul>
+  {% endif %}
+
+  {% if discount_applied %}
+    <div>Total: {{ new_total_price | money }}</div>
+  {% else %}
+    <div>Total: {{ cart.total_price | money }}</div>
+  {% endif %}
+</div>
+
+
+
+
+
+
+
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div>
     <div class="cart__footer">
