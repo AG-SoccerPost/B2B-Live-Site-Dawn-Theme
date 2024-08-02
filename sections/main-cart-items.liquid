@@ -41,7 +41,7 @@
           {%- assign new_line_price = item.line_price | times: discount_multiplier -%}
           {%- assign subtotal = item.line_price | minus: new_line_price -%}
 
-          line_item.change_line_price(subtotal, message: discount_message)
+          // line_item.change_line_price(subtotal, message: discount_message)
 
         
           console.log({{ discount_message | json }});
