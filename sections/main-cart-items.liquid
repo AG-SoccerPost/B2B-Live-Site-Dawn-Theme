@@ -31,7 +31,7 @@
 
 
 {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
-    <!-- <script>
+    <script>
       {%- assign discount_amount = 100 -%} 
       {%- assign discount_message = 'Discount applied!' -%}
       
@@ -39,9 +39,10 @@
         
           {%- assign discount_multiplier = discount_amount | divided_by: 100 -%}
           {%- assign new_line_price = item.line_price | times: discount_multiplier -%}
-      
-        
-        {%- assign subtotal = item.line_price | minus: new_line_price -%}
+          {%- assign subtotal = item.line_price | minus: new_line_price -%}
+
+          line_item.change_line_price(subtotal, message: discount_message)
+
         
           console.log({{ discount_message | json }});
           console.log({{ item.line_price | money }});
@@ -52,7 +53,19 @@
           
         
       {%- endfor -%}
-    </script> -->
+    </script>
+
+
+  def apply(line_item)
+    new_line_price = if @discount_type == :percent
+      line_item.line_price * @discount_amount
+    else
+      [line_item.line_price - (@discount_amount * line_item.quantity), Money.zero].max
+    end
+
+    line_item.change_line_price(new_line_price, message: @discount_message)
+  end
+end
 {% endif %}
 
 
