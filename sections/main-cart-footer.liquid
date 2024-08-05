@@ -25,39 +25,6 @@
                     <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
                     <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
                   </div>
-                <!-- {% if customer.tags contains 'Corp' or customer.tags contains 'Corporate' %}
-                  {% assign discount_applied = true %}
-                  {% assign discount_amount = 100 %}
-                  {% assign discount_value = cart.items_subtotal_price | times: discount_amount | divided_by: 100 %}
-                  {% assign new_total_price = cart.total_price | minus: discount_value %}
-
-                  {% if cart.cart_level_discount_applications.size > 0 or discount_applied %}
-                      Discounts:
-                      <ul>
-                        {% for discount_application in cart.cart_level_discount_applications %}
-                          <li>
-                            {{ discount_application.title }} - {{ discount_application.total_allocated_amount | money }}
-                          </li>
-                        {% endfor %}
-                        {% if discount_applied %}
-                          <li>
-                            Corporate discount applied! - {{ discount_value | money }}
-                          </li>
-                        {% endif %}
-                      </ul>
-                  {% endif %}
-                
-                          {% if discount_applied %}
-                            <div>Total: {{ new_total_price | money }}</div>
-                          {% endif %}
-                {% else%}
-                  <div class="totals">
-                    <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
-                    <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
-                  </div>
-                {% endif %} -->
-
-
                 
                 <div>
                   {%- if cart.cart_level_discount_applications.size > 0 -%}
