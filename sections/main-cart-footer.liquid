@@ -59,7 +59,10 @@
                     {{ 'sections.cart.update' | t }}
                   </button>
                 </noscript>
-
+                
+                <button onclick="location.href='/cart/clear';" id="clearClart" class="cart__checkout-button button" name="clearCart"{% if cart == empty %} disabled{% endif %}>
+                  Clear Cart
+                </button>
                 <button type="submit" id="checkout" class="cart__checkout-button button" name="checkout"{% if cart == empty %} disabled{% endif %} form="cart">
                   {{ 'sections.cart.checkout' | t }}
                 </button>
