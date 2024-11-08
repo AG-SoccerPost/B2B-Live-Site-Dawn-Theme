@@ -129,7 +129,8 @@
       "header": {
         "type": "header",
         "custom_css": [
-          "a, span {font-size: 1.8rem;}"
+          "a,span {font-size: 1.8rem;}",
+          ".list-menu--inline {gap: 2.5rem;}"
         ],
         "settings": {
           "color_scheme": "background-1",
