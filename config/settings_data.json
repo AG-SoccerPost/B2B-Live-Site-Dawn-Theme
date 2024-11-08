@@ -129,7 +129,7 @@
       "header": {
         "type": "header",
         "custom_css": [
-          "a{font-size: 1.2rem;}"
+          "a, span {font-size: 1.8rem;}"
         ],
         "settings": {
           "color_scheme": "background-1",
