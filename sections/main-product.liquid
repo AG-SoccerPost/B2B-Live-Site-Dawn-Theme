@@ -201,6 +201,7 @@
             </h1>
         {%- assign current_variant = product.selected_or_first_available_variant -%}
 <span>SKU: {{ current_variant.sku }}</span>
+<br/>
 {%- if product.metafields.custom.manufacturer_sku -%}
         <span {% if product.metafields.custom.manufacturer_sku == blank %}style="display: none"{% endif %}>
          Manufacturer SKU: <span>{{ product.metafields.custom.manufacturer_sku }}</span>
