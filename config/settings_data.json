@@ -220,7 +220,7 @@
       },
       "9722070057798483667": {
         "type": "shopify://apps/multivariants-bulk-order/blocks/app-embed/e556349f-fd26-4006-9dd9-dcbf70aa55b3",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
