@@ -203,11 +203,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "9722070057798483667": {
-        "type": "shopify://apps/multivariants-bulk-order/blocks/app-embed/e556349f-fd26-4006-9dd9-dcbf70aa55b3",
-        "disabled": false,
-        "settings": {}
-      },
       "4318962865815008709": {
         "type": "shopify://apps/boost-ai-search-discovery/blocks/boost-sd/7fc998ae-a150-4367-bab8-505d8a4503f7",
         "disabled": false,
@@ -220,6 +215,11 @@
       },
       "10584378009325473800": {
         "type": "shopify://apps/reorder-master-repeat-orders/blocks/app/f04515ed-ac2e-42a3-8071-abd609ed8ebf",
+        "disabled": false,
+        "settings": {}
+      },
+      "9722070057798483667": {
+        "type": "shopify://apps/multivariants-bulk-order/blocks/app-embed/e556349f-fd26-4006-9dd9-dcbf70aa55b3",
         "disabled": false,
         "settings": {}
       }
