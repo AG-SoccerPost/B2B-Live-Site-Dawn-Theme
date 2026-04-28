@@ -53,6 +53,22 @@
               grid--{{ section.settings.columns_desktop }}-col-desktop
             {% endif %}">
             {%- for product in collection.products -%}
+              {%- comment -%} Check if customer has the 'Corporate' tag {%- endcomment -%}
+              {%- assign is_corporate = false -%}
+              {%- if customer.tags contains 'Corporate' -%}
+                {%- assign is_corporate = true -%}
+              {%- endif -%}
+
+              {%- comment -%} Check if product has the 'Office Supplies' tag {%- endcomment -%}
+              {%- assign is_office_supply = false -%}
+              {%- if product.tags contains 'Office Supplies' or product.tags contains 'office supplies' -%}
+                {%- assign is_office_supply = true -%}
+              {%- endif -%}
+
+              {%- comment -%} Hide product if it is Office Supplies and user is NOT Corporate {%- endcomment -%}
+              {%- if is_office_supply and is_corporate == false -%}
+                {%- continue -%}
+              {%- endif -%}
               {% assign lazy_load = false %}
               {%- if forloop.index > 2 -%}
                 {%- assign lazy_load = true -%}
