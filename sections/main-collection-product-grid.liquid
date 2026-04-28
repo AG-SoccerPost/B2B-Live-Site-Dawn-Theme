@@ -181,36 +181,6 @@ var boostPFSTemplate = {
 };
 </script>
 
-<script>
-// Wait for the Boost engine to be ready
-window.boostPFSFilterConfig = window.boostPFSFilterConfig || {};
-window.boostPFSFilterConfig.callbacks = window.boostPFSFilterConfig.callbacks || {};
-
-window.boostPFSFilterConfig.callbacks.prepareProductData = function(data) {
-  // 1. Get the customer's tag status from Shopify Liquid
-  var isCorporate = {% if customer.tags contains 'Corporate' or customer.tags contains 'corp' %}true{% else %}false{% endif %};
-
-  // 2. If the customer is NOT corporate, filter out 'Office Supplies'
-  if (!isCorporate) {
-    return data.filter(function(product) {
-      // Look through all tags of the product
-      var productTags = product.tags || [];
-      
-      // Return true if the product DOES NOT have the 'Office Supplies' tag
-      // This uses .some to check if any tag matches exactly
-      var hasOfficeTag = productTags.some(function(tag) {
-         return tag.toLowerCase() === 'office supplies';
-      });
-
-      return !hasOfficeTag;
-    });
-  }
-
-  // If they are corporate, return all data as normal
-  return data;
-};
-</script>
-
 {% schema %}
 
 {
