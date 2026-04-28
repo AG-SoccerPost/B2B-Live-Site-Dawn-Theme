@@ -181,29 +181,6 @@ var boostPFSTemplate = {
 };
 </script>
 
-<script>
-  (function() {
-    // 1. Get the customer's status from Liquid
-    var isCorporate = {% if customer.tags contains 'Corporate' %}true{% else %}false{% endif %};
-
-    // 2. If they are NOT corporate, we need to filter the Boost results
-    if (!isCorporate) {
-      window.boostPFSFilterConfig = window.boostPFSFilterConfig || {};
-      window.boostPFSFilterConfig.callbacks = window.boostPFSFilterConfig.callbacks || {};
-
-      window.boostPFSFilterConfig.callbacks.prepareProductData = function(data) {
-        if (!data) return data;
-
-        // Return only products that DON'T have the 'Office Supplies' tag
-        return data.filter(function(product) {
-          var tags = product.tags || [];
-          // Checks for 'Office Supplies' (case-sensitive based on Shopify tags)
-          return !tags.includes('Office Supplies');
-        });
-      };
-    }
-  })();
-</script>
 {% schema %}
 
 {
