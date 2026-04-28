@@ -90,6 +90,19 @@
                       {% if collection.products_count == 4 %} grid--4-col-desktop{% else %} grid--3-col-tablet grid--one-third-max grid--4-col-desktop grid--quarter-max{% endif %}
                     {% endif %}">
             {%- for product in collection.products -%}
+              {%- assign is_corporate = false -%}
+              {%- if customer.tags contains 'Corporate' -%}
+                {%- assign is_corporate = true -%}
+              {%- endif -%}
+
+              {%- assign is_office_supply = false -%}
+              {%- if product.tags contains 'Office Supplies' -%}
+                {%- assign is_office_supply = true -%}
+              {%- endif -%}
+
+              {%- if is_office_supply == true and is_corporate == false -%}
+                {%- continue -%}
+              {%- endif -%}
               <li class="grid__item">
                 {% render 'card-product',
                   card_product: product,
