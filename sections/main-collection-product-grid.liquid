@@ -181,6 +181,53 @@ var boostPFSTemplate = {
 };
 </script>
 
+{%- assign is_corporate = false -%}
+{%- if customer.tags contains 'Corporate' or customer.tags contains 'corp' -%}
+  {%- assign is_corporate = true -%}
+{%- endif -%}
+
+{%- unless is_corporate -%}
+<style>
+  /* CSS: Instant hide by targeting the product handle in Boost data attributes */
+  [data-handle="packing-tape-6-rolls"],
+  [data-boost-theme-search-reg-product-handle="packing-tape-6-rolls"],
+  .grid__item[data-handle="packing-tape-6-rolls"] {
+    display: none !important;
+  }
+</style>
+
+<script>
+(function() {
+  const targetHandle = 'packing-tape-6-rolls';
+
+  const hideProduct = function() {
+    // Target any element that has the product handle assigned by the Boost app
+    const selectors = [
+      `[data-handle="${targetHandle}"]`,
+      `[data-boost-theme-search-reg-product-handle="${targetHandle}"]`
+    ];
+    
+    document.querySelectorAll(selectors.join(',')).forEach(item => {
+      item.style.setProperty('display', 'none', 'important');
+    });
+  };
+
+  // 1. Run immediately on page load
+  hideProduct();
+
+  // 2. Run whenever Boost finishes filtering or searching
+  document.addEventListener('boostPFSFilterRenderEvent', hideProduct);
+
+  // 3. Fallback: Watch the grid for changes (useful for "Load More" buttons)
+  const gridObserver = new MutationObserver(hideProduct);
+  const targetGrid = document.querySelector('#CollectionProductGrid') || document.querySelector('.boost-pfs-filter-products');
+  if (targetGrid) {
+    gridObserver.observe(targetGrid, { childList: true, subtree: true });
+  }
+})();
+</script>
+{%- endunless -%}
+
 {% schema %}
 
 {
